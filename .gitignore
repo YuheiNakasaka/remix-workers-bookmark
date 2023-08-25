@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+/.cache
+.dev.vars
+/public/build
+/build
+.vscode
+.wrangler
