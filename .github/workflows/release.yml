@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Include the migrations:apply command in the postCommands step? (yes/no)"
+        required: true
+        default: "no"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          preCommands: npm run prod:build
+          postCommands: |
+            if [ "${{ github.event.inputs.name }}" = "yes" ]; then npm run migrations:apply; else echo "Skipping migrations:apply"; fi

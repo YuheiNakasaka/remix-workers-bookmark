@@ -4,10 +4,14 @@
   "type": "module",
   "scripts": {
     "build": "remix build",
+    "prod:build": "NODE_ENV=production remix build",
     "deploy": "wrangler deploy",
     "dev": "remix dev --manual -c \"npm start\"",
-    "start": "wrangler dev ./build/index.js",
-    "typecheck": "tsc"
+    "start": "wrangler dev ./build/index.js --test-scheduled",
+    "typecheck": "tsc",
+    "migrations:gen": "drizzle-kit generate:sqlite",
+    "local:migrations:apply": "NO_D1_WARNING=true wrangler d1 migrations apply SAMPLE_DB --local",
+    "migrations:apply": "NO_D1_WARNING=true wrangler d1 migrations apply SAMPLE_DB"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.1.3",
@@ -22,11 +26,21 @@
     "@cloudflare/workers-types": "^3.19.0",
     "@remix-run/dev": "^1.19.3",
     "@remix-run/eslint-config": "^1.19.3",
+    "@remix-validated-form/with-zod": "^2.0.6",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
+    "better-sqlite3": "^8.5.2",
+    "drizzle-kit": "^0.19.13",
+    "drizzle-orm": "^0.28.5",
     "eslint": "^8.38.0",
+    "prettier": "^3.0.2",
+    "remix-auth": "^3.5.1",
+    "remix-auth-google": "^1.2.0",
+    "remix-validated-form": "^5.1.0",
+    "tailwindcss": "^3.3.3",
     "typescript": "^5.0.4",
-    "wrangler": "^3.1.1"
+    "wrangler": "^3.1.1",
+    "zod": "^3.22.2"
   },
   "engines": {
     "node": ">=16.13.0"
