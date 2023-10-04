@@ -6,14 +6,24 @@ interface BookmarkCardProps {
   url: string;
   image: string | null;
   comment: string | null;
+  description: string | null;
   count: number;
   editable: boolean;
   createdAt: string;
 }
 
 export default function BookmarkCard(props: BookmarkCardProps) {
-  const { slug, title, url, image, comment, count, createdAt, editable } =
-    props;
+  const {
+    slug,
+    title,
+    description,
+    url,
+    image,
+    comment,
+    count,
+    createdAt,
+    editable,
+  } = props;
   const date = new Date(createdAt);
   const formattedDate = date.toLocaleDateString("ja-JP", {
     year: "2-digit",
@@ -40,6 +50,9 @@ export default function BookmarkCard(props: BookmarkCardProps) {
       </a>
 
       <p className="mt-4 mb-4">{comment}</p>
+
+      {description && <small>{`${description}`.slice(0, 100)}...</small>}
+
       <div className="flex justify-between">
         {editable ? (
           <a className="text-xs text-gray-500" href={`/bookmarks/${slug}`}>

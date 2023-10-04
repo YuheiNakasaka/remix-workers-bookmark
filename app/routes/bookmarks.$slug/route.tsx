@@ -90,6 +90,7 @@ export default function BookmarkEdit() {
           editable={false}
           slug={bookmark.slug}
           title={bookmark.title}
+          description={bookmark.description}
           url={bookmark.url}
           image={bookmark.imageKey}
           comment={bookmark.comment}

@@ -96,6 +96,7 @@ export default function Index() {
             editable={true}
             slug={bookmark.slug}
             title={bookmark.title}
+            description={bookmark.description}
             url={bookmark.url}
             image={bookmark.imageKey}
             comment={bookmark.comment}

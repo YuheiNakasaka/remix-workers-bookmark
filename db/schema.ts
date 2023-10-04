@@ -16,6 +16,7 @@ export const bookmarks = sqliteTable(
     userId: integer("userId").notNull(),
     url: text("url").notNull(),
     title: text("title"),
+    description: text("description"),
     comment: text("comment"),
     imageKey: text("imageKey"),
     isProcessed: integer("isProcessed", { mode: "boolean" })
