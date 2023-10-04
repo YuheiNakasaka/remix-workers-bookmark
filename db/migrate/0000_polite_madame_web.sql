@@ -1,4 +1,4 @@
-CREATE TABLE `bookmarks` (
+CREATE TABLE IF NOT EXISTS `bookmarks` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`slug` text NOT NULL,
 	`userId` integer NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `bookmarks` (
 	`createdAt` integer NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`googleProfileId` text NOT NULL,
 	`iconUrl` text,
@@ -18,4 +18,4 @@ CREATE TABLE `users` (
 	`createdAt` integer NOT NULL
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `bookmarks_userId_url_unique` ON `bookmarks` (`userId`,`url`);
+CREATE UNIQUE INDEX IF NOT EXISTS `bookmarks_userId_url_unique` ON `bookmarks` (`userId`,`url`);
